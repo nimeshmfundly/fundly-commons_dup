@@ -12,7 +12,6 @@ public class MessageLogEntrySerializer extends JsonSerializer<MessageLogEntry> {
                         JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
       throws IOException {
     jsonGenerator.writeStartObject();
-    System.out.println("checking json generator" + jsonGenerator);
     jsonGenerator.writeStringField("message", messageLogEntry.getMessage());
     jsonGenerator.writeEndObject();
   }

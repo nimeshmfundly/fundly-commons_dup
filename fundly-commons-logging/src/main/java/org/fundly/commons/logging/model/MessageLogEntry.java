@@ -7,8 +7,20 @@ import org.fundly.commons.logging.serializer.MessageLogEntrySerializer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonSerialize(using = MessageLogEntrySerializer.class)
-public class MessageLogEntry extends BaseLogEntry{
+public class MessageLogEntry extends BaseLogEntry implements ExceptionLogEntry{
+
+  Throwable exception;
   public MessageLogEntry(LogEntryType logEntryType) {
     super(logEntryType);
+  }
+
+  @Override
+  public Throwable getException() {
+    return this.exception;
+  }
+
+  public MessageLogEntry setException(Throwable exception) {
+    this.exception = exception;
+    return this;
   }
 }

@@ -4,11 +4,11 @@ import org.fundly.commons.logging.model.MessageLogEntry;
 import org.slf4j.Logger;
 import org.springframework.boot.logging.LogLevel;
 
-public class DefaultMessageLogger extends BaseLogger<MessageLogEntry> implements MessageLogger, LoggerType<MessageLogger>{
+public class ExceptionMessageLogger extends BaseLogger<MessageLogEntry> implements MessageLogger, LoggerType<MessageLogger>{
 
   MessageLogEntry messageLogEntry;
 
-  public DefaultMessageLogger(Logger logger, LogLevel info){
+  public ExceptionMessageLogger(Logger logger, LogLevel info){
     super(logger, createBaseLogEntry());
     this.messageLogEntry = getBaseLogEntry();
   }
@@ -31,7 +31,9 @@ public class DefaultMessageLogger extends BaseLogger<MessageLogEntry> implements
 
   @Override
   public void logException(String message, Throwable throwable) {
-
+    this.messageLogEntry.setMessage(message);
+    this.messageLogEntry.setException(throwable);
+    flushLogs();
   }
 
   @Override
